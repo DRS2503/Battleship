@@ -1,3 +1,5 @@
+import { Ship } from './ship.js'
+
 export class GameBoard{
     #size
     #grid
@@ -9,7 +11,11 @@ export class GameBoard{
         this.#grid = Array.from({ length: size }, () =>  { return Array(size).fill(null) })
     }
 
-    receiveAttack(){
+    placeShip(horizonal = true, x, y, length){
+
+    }
+
+    receiveAttack(x, y){
         
     }
 
