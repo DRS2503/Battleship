@@ -11,6 +11,8 @@ export class GameBoard{
         this.#grid = Array.from({ length: size }, () =>  { return Array(size).fill(null) })
     }
 
+    getGrid(){ return this.#grid; }
+
     placeShip(horizonal = true, x, y, length){
         const ship = new Ship(length);
         this.#ships.push(ship);
@@ -27,9 +29,16 @@ export class GameBoard{
     }
 
     receiveAttack(x, y){
+        if(x < 0 || x >= this.#size || y < 0 || y >= this.#size){
+            return new Error('Coordinates out of range');
+        }
         if(this.#attacked.has(`${x},${y}`)){
             return new Error("Already attacked this space");
         }
+        if(this.#grid[x][y] != null){
+            this.#grid[x][y].hit();
+        }
+        this.#attacked.add(`${x},${y}`);
     }
 
     printGameBoard(){
