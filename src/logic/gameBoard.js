@@ -12,11 +12,24 @@ export class GameBoard{
     }
 
     placeShip(horizonal = true, x, y, length){
-
+        const ship = new Ship(length);
+        this.#ships.push(ship);
+        if(horizonal){
+            for(let i = 0; i < length; i++){
+                this.#grid[x][y + i] = ship;
+            }
+        }
+        else{
+            for(let i = 0; i < length; i++){
+                this.#grid[x + i][y] = ship;
+            }
+        }
     }
 
     receiveAttack(x, y){
-        
+        if(this.#attacked.has(`${x},${y}`)){
+            return new Error("Already attacked this space");
+        }
     }
 
     printGameBoard(){
