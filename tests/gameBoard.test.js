@@ -66,5 +66,4 @@ describe('Gameboard', () => {
         gameBoard.receiveAttack(3, 1);
         expect(gameBoard.allSunk()).toBe(false)
     })
-    
 })
