@@ -11,6 +11,15 @@ export class GameBoard{
         this.#grid = Array.from({ length: size }, () =>  { return Array(size).fill(null) })
     }
 
+    allSunk(){
+        for(let ship of this.#ships){
+            if(!ship.isSunk()){
+                return false
+            }
+        }
+        return true
+    }
+
     getGrid(){ return this.#grid; }
 
     placeShip(horizonal = true, x, y, length){
