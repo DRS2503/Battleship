@@ -66,4 +66,30 @@ describe('Gameboard', () => {
         gameBoard.receiveAttack(3, 1);
         expect(gameBoard.allSunk()).toBe(false)
     })
+
+    test('valid ship placement horizontal', () => {
+        gameBoard.placeShip(true, 0, 0, 3);
+        expect(gameBoard.validPlacement(true, 1, 0, 2)).toBe(true);
+    })
+
+    test('valid ship placement horizontal', () => {
+        gameBoard.placeShip(false, 0, 0, 3);
+        expect(gameBoard.validPlacement(false, 0, 1, 2)).toBe(true);
+    })
+
+    test('vertical collision', () => {
+        gameBoard.placeShip(true, 1, 0, 3);
+        expect(gameBoard.validPlacement(false, 0, 0, 2)).toBe(false);
+    })
+
+    test('Horizontal collision', () => {
+        gameBoard.placeShip(true, 0, 1, 2);
+        expect(gameBoard.validPlacement(true, 0, 0, 2)).toBe(false);
+    })
+
+    test('Valid but close', () => {
+        gameBoard.placeShip(true, 0, 1, 2);
+        expect(gameBoard.validPlacement(false, 0, 0, 1)).toBe(true);
+    })
+    
 })
