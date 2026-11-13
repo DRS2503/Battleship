@@ -19,7 +19,12 @@ export function addPlayer(name){
 }
 
 export function checkWinner(){
-
+    for(let player of playersList){
+        if(player.gameBoard.allSunk()){
+            return true
+        }
+    }
+    return false;
 }
 
 export function setNextPlayer(){
