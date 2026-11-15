@@ -25,14 +25,14 @@ export class GameBoard {
     validPlacement(horizontal, x, y, length) {
         if (horizontal) {
             for (let i = 0; i < length; i++) {
-                if (this.#grid[x][y + i] != null) {
+                if (x >= this.#size || y + i >= this.#size || this.#grid[x][y + i] != null) {
                     return false
                 }
             }
         }
         else {
             for (let i = 0; i < length; i++) {
-                if (this.#grid[x + 1][y] != null) {
+                if (x + i >= this.#size || y >= this.#size || this.#grid[x + i][y] != null) {
                     return false
                 }
             }
@@ -40,7 +40,7 @@ export class GameBoard {
         return true
     }
 
-    placeShip(horizonal = true, x, y, length) {
+    placeShip(horizonal = true, x, y, length){
         const ship = new Ship(length);
         this.#ships.push(ship);
         if (horizonal) {

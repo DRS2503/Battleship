@@ -92,4 +92,15 @@ describe('Gameboard', () => {
         expect(gameBoard.validPlacement(false, 0, 0, 1)).toBe(true);
     })
     
+    test('Horizontal out of bounds', () => {
+        expect(gameBoard.validPlacement(true, 9, 9, 2)).toBe(false);
+    })
+
+    test('Vertical out of bounds', () => {
+        expect(gameBoard.validPlacement(false, 9, 1, 2)).toBe(false);
+    })
+
+    test('Out of bounds', () => {
+        expect(gameBoard.validPlacement(true, 12, 12, 3)).toBe(false);
+    })
 })
