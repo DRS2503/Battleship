@@ -91,6 +91,10 @@ describe('Gameboard', () => {
         gameBoard.placeShip(true, 0, 1, 2);
         expect(gameBoard.validPlacement(false, 0, 0, 1)).toBe(true);
     })
+
+    test('Out of bounds placeship error', () => {
+        expect(gameBoard.placeShip(true, 12, 12, 3)).toEqual(Error('Ship placement invalid, overlapping another ship or out of bounds'));
+    })
     
     test('Horizontal out of bounds', () => {
         expect(gameBoard.validPlacement(true, 9, 9, 2)).toBe(false);

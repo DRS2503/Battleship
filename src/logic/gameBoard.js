@@ -41,6 +41,9 @@ export class GameBoard {
     }
 
     placeShip(horizonal = true, x, y, length){
+        if(!this.validPlacement(true, x, y, length)){
+            return new Error('Ship placement invalid, overlapping another ship or out of bounds');
+        }
         const ship = new Ship(length);
         this.#ships.push(ship);
         if (horizonal) {
@@ -64,8 +67,11 @@ export class GameBoard {
         }
         if (this.#grid[x][y] != null) {
             this.#grid[x][y].hit();
+            this.#attacked.add(`${x},${y}`);
+            return 'hit'
         }
         this.#attacked.add(`${x},${y}`);
+        return 'miss'
     }
 
     printGameBoard() {
