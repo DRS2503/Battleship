@@ -73,20 +73,4 @@ export class GameBoard {
         this.#attacked.add(`${x},${y}`);
         return 'miss'
     }
-
-    printGameBoard() {
-        let string = '';
-        for (let i = 0; i < this.#size; i++) {
-            for (let j = 0; j < this.#size; j++) {
-                if (this.#grid[i][j] == null) {
-                    string = string + " " + "00";
-                }
-                else {
-                    string = string + " " + "11"
-                }
-            }
-            console.log(string);
-            string = '';
-        }
-    }
 }

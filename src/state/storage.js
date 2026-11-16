@@ -15,6 +15,14 @@ export function getOpponent(){
     }
 }
 
+export function getPlayerGameBoard(){
+    return playersList[0].gameBoard;
+}
+
+export function getComputerGameBoard(){
+    return playersList[1].gameBoard;
+}
+
 export function addComputer(){
     const computer = new Computer();
     computer.buildFleet();

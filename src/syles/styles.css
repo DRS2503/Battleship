@@ -1,3 +1,21 @@
 *{
     background-color:darkolivegreen;
 }
+
+.boards-container{
+    display: flex;
+    height: 650px;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.player-board, .computer-board{
+    border: 2px solid black;
+    height: 300px;
+    width: 300px;
+}
+
