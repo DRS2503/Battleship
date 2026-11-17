@@ -59,18 +59,24 @@ export class GameBoard {
     }
 
     receiveAttack(x, y) {
-        if (x < 0 || x >= this.#size || y < 0 || y >= this.#size) {
-            return new Error('Coordinates out of range');
+        if (!this.validPlacement){
+            //return new Error('Coordinates out of range or overlapping ships');
+            return false;
         }
         if (this.#attacked.has(`${x},${y}`)) {
-            return new Error("Already attacked this space");
+            //return new Error("Already attacked this space");
+            return false;
         }
-        if (this.#grid[x][y] != null) {
+        if (this.#grid[x][y] != null){
             this.#grid[x][y].hit();
             this.#attacked.add(`${x},${y}`);
-            return 'hit'
+            this.getGrid()[x][y] = 'x'
+            //return 'hit'
+            return true;
         }
         this.#attacked.add(`${x},${y}`);
-        return 'miss'
+        this.getGrid()[x][y] = 'o'
+        //return 'miss'
+        return true;
     }
 }

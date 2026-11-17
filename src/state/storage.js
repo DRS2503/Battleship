@@ -1,10 +1,17 @@
 import { Computer, Person } from "../logic/player.js";
+import { renderComputerBoard, renderPlyerBoard, displayWinner } from "../dom/render.js";
 
 let currentPlayer = null;
 let playersList = [];
 
 export function getCurrentPlayer(){ return currentPlayer}
 export function getPlayerList() { return playersList }
+
+function clearGameBoards(){
+    for(let player of playersList){
+        player.gameBoard = [];
+    }
+}
 
 export function getOpponent(){
     if(currentPlayer == playersList[0]){
@@ -26,6 +33,7 @@ export function getComputerGameBoard(){
 export function addComputer(){
     const computer = new Computer();
     computer.buildFleet();
+
     playersList.push(computer);
     currentPlayer = playersList[0];
 }
@@ -61,4 +69,30 @@ export function setNextPlayer(){
 export function resetGame(){
     currentPlayer = null;
     playersList = [];
+}
+
+export function playRound(x, y){
+    let cpuAttack = false;
+    if(!attack(x, y)){
+        return
+    }
+    if(checkWinner()){
+        renderComputerBoard();
+        renderPlyerBoard();
+        displayWinner(currentPlayer.getPlayerName());
+        return
+    }
+    setNextPlayer();
+    while(!cpuAttack){
+        const xcoord = Math.floor(Math.random() * 10); // 0-9
+        const ycoord = Math.floor(Math.random() * 10); // 0-9
+        cpuAttack = attack(xcoord, ycoord);
+    }
+    if(checkWinner()){
+        displayWinner(currentPlayer.getPlayerName());
+        return
+    }
+    setNextPlayer();
+    renderComputerBoard();
+    renderPlyerBoard();
 }
